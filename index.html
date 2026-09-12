@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud PC Platform — Consumer Virtual Computer & Cloud PC</title>
+    <meta name="description" content="Consumer Virtual Computer & Cloud PC Platform. Build your computer in the cloud, choose resources, and connect from any device." />
+    <meta property="og:title" content="Cloud PC Platform — Consumer Virtual Computer & Cloud PC" />
+    <meta property="og:description" content="Consumer Virtual Computer & Cloud PC Platform. Build your computer in the cloud, choose resources, and connect from any device." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="build.html" class="nav-link">Build Computer</a>
+          <a href="dashboard.html" class="nav-link">My Computers</a>
+          <a href="account.html" class="nav-link">Account & Usage</a>
+        </nav>
+
+        <div class="nav-auth">
+          <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+          <a href="login.html?mode=signup" class="btn btn-primary btn-sm">Create Account</a>
+        </div>
+
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="status-badge status-ready" style="margin-bottom: 18px;">
+          <span class="status-dot"></span> Bare-Metal Infrastructure Online • Low Latency
+        </div>
+        <h1 class="hero-title">Build Your Own Computer In The Cloud</h1>
+        <p class="hero-description">
+          Experience real virtual computers running on enterprise hardware. Choose your exact CPU, RAM, GPU, and NVMe storage. Connect instantly from any browser, tablet, phone, or laptop.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="build.html" class="btn btn-primary btn-lg">
+            Build Your Computer Now →
+          </a>
+          <a href="dashboard.html" class="btn btn-secondary btn-lg">
+            View My Computers
+          </a>
+        </div>
+
+        <!-- Live Infrastructure strip -->
+        <div class="card" style="margin-top: 48px; padding: 18px 24px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">
+              Active Edge Datacenters
+            </span>
+            <span class="status-badge status-ready" style="font-size: 0.75rem;">
+              <span class="status-dot"></span> Real-Time Network Mesh
+            </span>
+          </div>
+          <div class="grid-4" style="gap: 12px;" id="hero-locations-strip">
+            <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.9rem; font-weight: 600;">🇮🇳 Mumbai (BOM)</div>
+              <div class="text-secondary" style="font-size: 0.75rem;">18ms ping • NVIDIA & Intel Xeon</div>
+            </div>
+            <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.9rem; font-weight: 600;">🇮🇳 Bengaluru (BLR)</div>
+              <div class="text-secondary" style="font-size: 0.75rem;">24ms ping • High-Compute Tier</div>
+            </div>
+            <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.9rem; font-weight: 600;">🇸🇬 Singapore (SIN)</div>
+              <div class="text-secondary" style="font-size: 0.75rem;">38ms ping • AI / GPU Cluster</div>
+            </div>
+            <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.9rem; font-weight: 600;">🇩🇪 Frankfurt (FRA)</div>
+              <div class="text-secondary" style="font-size: 0.75rem;">62ms ping • Enterprise Tier</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Highlights & Real Engineering Scope -->
+    <section style="padding: 60px 0; border-top: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div style="text-align: center; max-width: 650px; margin: 0 auto 48px;">
+          <h2 style="font-size: 2rem; margin-bottom: 12px;">Real Hardware. No Compromise.</h2>
+          <p class="text-secondary">
+            Unlike emulators or mock terminals, CloudPC orchestrates genuine KVM virtual machines on bare-metal servers managed by authoritative Server Agents.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">⚡</div>
+            <h3 class="card-title">Dedicated Hardware Power</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Scale from 2 vCPUs up to 64 vCPUs and 128 GB RAM with dedicated NVMe storage delivering up to 120,000 IOPS.
+            </p>
+            <div class="chip">AMD EPYC & Intel Xeon Scalable</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">🎮</div>
+            <h3 class="card-title">Real Dedicated GPUs</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Accelerate 3D rendering, machine learning, and high-framerate workflows with real NVIDIA RTX A4000, A10G, and T4 accelerators.
+            </p>
+            <div class="chip">Direct PCIe Passthrough</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">💳</div>
+            <h3 class="card-title">PhonePe & PayPal Payments</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Seamless payments via Indian UPI, PhonePe QR, or international PayPal with real backend cryptographic verification.
+            </p>
+            <div class="chip">UPI Instant Verification</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">💾</div>
+            <h3 class="card-title">Persistent Disk & Snapshots</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Your files, programs, and system changes stay saved. Create one-click snapshots and restore states on demand.
+            </p>
+            <div class="chip">Zero Data Loss Guarantee</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">🚀</div>
+            <h3 class="card-title">Instant Resume</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Stop your VM when inactive to preserve compute budget. Resume instantly from memory in less than 4 seconds.
+            </p>
+            <div class="chip">Memory Hibernation</div>
+          </div>
+
+          <div class="card">
+            <div style="font-size: 2rem; margin-bottom: 12px;">🛡️</div>
+            <h3 class="card-title">Fix My PC Diagnostics</h3>
+            <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 12px;">
+              Automated system scans inspect kernel daemons, network routing, and memory limits, applying 1-click repairs.
+            </p>
+            <div class="chip">Self-Healing Agent</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Step-by-Step Flow -->
+    <section style="padding: 60px 0; background-color: var(--bg-surface); border-top: 1px solid var(--border-subtle);">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+          <h2 style="font-size: 1.85rem; margin-bottom: 8px;">How The Cloud PC Platform Works</h2>
+          <p class="text-secondary">Direct customer control to real physical infrastructure</p>
+        </div>
+
+        <div class="grid-4" style="text-align: center;">
+          <div class="card" style="padding: 24px 16px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700;">1</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Configure Machine</h4>
+            <p class="text-secondary" style="font-size: 0.8rem;">Pick CPU, RAM, GPU, NVMe disk, OS, and preferred edge datacenter.</p>
+          </div>
+          <div class="card" style="padding: 24px 16px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700;">2</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Verify & Checkout</h4>
+            <p class="text-secondary" style="font-size: 0.8rem;">Live capacity check, itemized server pricing, and verified payment.</p>
+          </div>
+          <div class="card" style="padding: 24px 16px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700;">3</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Auto-Provisioning</h4>
+            <p class="text-secondary" style="font-size: 0.8rem;">Server Agent provisions storage, flashes OS image, and assigns networking.</p>
+          </div>
+          <div class="card" style="padding: 24px 16px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-success); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 700;">4</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Connect & Work</h4>
+            <p class="text-secondary" style="font-size: 0.8rem;">Access your real PC session with keyboard, mouse, and clipboard sync.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <a href="build.html" class="btn btn-primary btn-lg">
+            Start Building Your PC →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="nav-logo" style="margin-bottom: 12px;">
+              <div class="nav-logo-icon">💻</div>
+              <span>Cloud<strong>PC</strong></span>
+            </div>
+            <p class="text-secondary" style="font-size: 0.85rem; line-height: 1.6; max-width: 320px;">
+              The consumer virtual computer platform delivering personal cloud PCs on high-performance infrastructure.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Products</h4>
+            <ul>
+              <li><a href="build.html">Build Computer</a></li>
+              <li><a href="dashboard.html">My Computers</a></li>
+              <li><a href="build.html">GPU Workstations</a></li>
+              <li><a href="build.html">Developer Instances</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Management</h4>
+            <ul>
+              <li><a href="account.html">Billing & Invoices</a></li>
+              <li><a href="account.html">Usage Analytics</a></li>
+              <li><a href="dashboard.html">Snapshots & Backups</a></li>
+              <li><a href="account.html">Active Sessions</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Security & Terms</h4>
+            <ul>
+              <li><a href="login.html">Firebase Authentication</a></li>
+              <li><a href="account.html">Private Vault</a></li>
+              <li><a href="#">Service Level Agreement</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>&copy; 2026 Cloud PC Platform. All rights reserved. Operating on authoritative backend infrastructure.</div>
+          <div style="display: flex; gap: 16px;">
+            <span>PhonePe / UPI Verified</span>
+            <span>PayPal Gateway</span>
+            <span>TLS 1.3 Encrypted</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

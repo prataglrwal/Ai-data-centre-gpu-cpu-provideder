@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Virtual Computers — Cloud PC Platform</title>
+    <meta name="description" content="View and manage customer virtual machines: live status, resource usage, power control, and remote access." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="build.html" class="nav-link">Build Computer</a>
+          <a href="dashboard.html" class="nav-link active">My Computers</a>
+          <a href="account.html" class="nav-link">Account & Usage</a>
+        </nav>
+        <div class="nav-auth">
+          <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="padding: 40px 20px 80px;">
+      <!-- Dashboard Top Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <h1 style="font-size: 2rem; margin-bottom: 6px;">My Virtual Computers</h1>
+          <p class="text-secondary" style="font-size: 0.95rem;">
+            Real-time status, direct power controls, and live connections to your cloud PCs.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button id="refresh-btn" class="btn btn-outline btn-sm" title="Refresh state from backend">
+            ↻ Refresh Status
+          </button>
+          <a href="build.html" class="btn btn-primary btn-sm">
+            + Build New Computer
+          </a>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="dashboard-loading" style="text-align: center; padding: 60px 0; display: none;">
+        <div class="spinner" style="margin: 0 auto 16px;"></div>
+        <p class="text-secondary">Retrieving instance states from backend scheduler...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="card" style="display: none; text-align: center; padding: 60px 20px; max-width: 580px; margin: 40px auto;">
+        <div style="font-size: 3rem; margin-bottom: 16px;">🖥️</div>
+        <h2 style="font-size: 1.4rem; margin-bottom: 8px;">No Virtual Computers Found</h2>
+        <p class="text-secondary" style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 24px;">
+          You haven't built or provisioned any cloud computers on your account yet. Choose your preferred hardware and launch your first instance in minutes.
+        </p>
+        <a href="build.html" class="btn btn-primary btn-lg">
+          Build Your First Cloud PC →
+        </a>
+      </div>
+
+      <!-- Computers Grid -->
+      <div id="computers-grid" class="grid-2" style="gap: 24px;">
+        <!-- Dynamically rendered via /js/dashboard.js -->
+      </div>
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computer Dashboard & Management — Cloud PC Platform</title>
+    <meta name="description" content="Manage your virtual computer: live telemetry, resource allocation, storage files, snapshots, and diagnostics." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="build.html" class="nav-link">Build Computer</a>
+          <a href="dashboard.html" class="nav-link active">My Computers</a>
+          <a href="account.html" class="nav-link">Account & Usage</a>
+        </nav>
+        <div class="nav-auth">
+          <a href="dashboard.html" class="btn btn-outline btn-sm">← Back to Computers</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="padding: 40px 20px 80px;">
+      <!-- Computer Top Header -->
+      <div class="card" style="padding: 24px; margin-bottom: 32px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+              <h1 id="pc-title" style="font-size: 1.8rem;">Loading Computer...</h1>
+              <div id="pc-status-badge" class="status-badge status-starting">
+                <span class="status-dot"></span> Checking status
+              </div>
+            </div>
+            <div id="pc-id-display" class="text-secondary" style="font-size: 0.85rem;">
+              Retrieving hardware details from Server Agent...
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a id="pc-connect-top-btn" href="#" class="btn btn-primary" style="display: none;">
+              Connect to Desktop →
+            </a>
+            <button id="btn-action-start" class="btn btn-outline btn-sm">Power On</button>
+            <button id="btn-action-stop" class="btn btn-outline btn-sm">Stop</button>
+            <button id="btn-action-restart" class="btn btn-outline btn-sm">Restart</button>
+            <button id="btn-action-shutdown" class="btn btn-outline btn-sm">ACPI Shutdown</button>
+            <button id="btn-action-resume" class="btn btn-outline btn-sm" title="Instant resume from RAM hibernation">Instant Resume</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specs Overview Strip -->
+      <div id="specs-overview-list" class="grid-4" style="gap: 16px; margin-bottom: 32px;">
+        <!-- Filled by computer.js -->
+      </div>
+
+      <!-- Management Navigation Tabs -->
+      <div class="tabs-nav">
+        <button class="dashboard-tab tab-btn active" data-target="tab-telemetry">Live Telemetry & Metrics</button>
+        <button class="dashboard-tab tab-btn" data-target="tab-storage">Persistent Storage & Files</button>
+        <button class="dashboard-tab tab-btn" data-target="tab-snapshots">Snapshots & Recovery</button>
+        <button class="dashboard-tab tab-btn" data-target="tab-diagnostics">Fix My PC (Diagnostics)</button>
+        <button class="dashboard-tab tab-btn" data-target="tab-upgrade">Modify & Upgrade</button>
+      </div>
+
+      <!-- TAB 1: Live Telemetry & Resource Utilization -->
+      <div id="tab-telemetry" class="tab-content-panel">
+        <div class="grid-2" style="gap: 24px;">
+          
+          <!-- CPU Metric Card -->
+          <div class="card" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <span class="card-title" style="font-size: 1.05rem;">CPU Utilization</span>
+              <strong id="cpu-usage-val" style="font-size: 1.4rem; color: var(--color-accent);">—%</strong>
+            </div>
+            <div class="meter-bar-container">
+              <div id="cpu-usage-bar" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div id="cpu-alloc-info" class="text-secondary" style="font-size: 0.8rem; margin-top: 10px;">
+              Allocation: Active • Reservation: 100%
+            </div>
+          </div>
+
+          <!-- Memory Metric Card -->
+          <div class="card" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <span class="card-title" style="font-size: 1.05rem;">RAM Memory Used</span>
+              <strong id="ram-usage-val" style="font-size: 1.4rem; color: var(--color-accent);">— / — GB</strong>
+            </div>
+            <div class="meter-bar-container">
+              <div id="ram-usage-bar" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div id="ram-alloc-info" class="text-secondary" style="font-size: 0.8rem; margin-top: 10px;">
+              ECC Memory Limit: 100% Reserved
+            </div>
+          </div>
+
+          <!-- GPU Metric Card -->
+          <div class="card" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <span class="card-title" style="font-size: 1.05rem;">GPU Engine Load</span>
+              <strong id="gpu-usage-val" style="font-size: 1.4rem; color: var(--color-accent);">—%</strong>
+            </div>
+            <div class="meter-bar-container">
+              <div id="gpu-usage-bar" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div id="gpu-alloc-info" class="text-secondary" style="font-size: 0.8rem; margin-top: 10px;">
+              PCIe Passthrough Stream
+            </div>
+          </div>
+
+          <!-- Storage Metric Card -->
+          <div class="card" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <span class="card-title" style="font-size: 1.05rem;">NVMe Disk Space</span>
+              <strong id="storage-usage-val" style="font-size: 1.4rem; color: var(--color-accent);">— / — GB</strong>
+            </div>
+            <div class="meter-bar-container">
+              <div id="storage-usage-bar" class="meter-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div id="storage-alloc-info" class="text-secondary" style="font-size: 0.8rem; margin-top: 10px;">
+              Persistent filesystem
+            </div>
+          </div>
+
+          <!-- Network Transfer Card -->
+          <div class="card" style="padding: 24px; grid-column: 1 / -1;">
+            <h3 class="card-title" style="font-size: 1.05rem; margin-bottom: 12px;">Network Throughput</h3>
+            <div class="grid-2" style="gap: 16px;">
+              <div style="background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                <div class="text-secondary" style="font-size: 0.8rem;">Incoming (RX) Bandwidth</div>
+                <strong id="net-rx-val" style="font-size: 1.2rem; color: var(--color-success);">0 KB/s</strong>
+              </div>
+              <div style="background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                <div class="text-secondary" style="font-size: 0.8rem;">Outgoing (TX) Bandwidth</div>
+                <strong id="net-tx-val" style="font-size: 1.2rem; color: var(--color-primary);">0 KB/s</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 2: Persistent Storage & Files -->
+      <div id="tab-storage" class="tab-content-panel" style="display: none;">
+        <div class="card" style="padding: 24px;">
+          <div class="card-header" style="margin-bottom: 20px;">
+            <div>
+              <h3 class="card-title">Persistent Disk Explorer</h3>
+              <p class="text-secondary" style="font-size: 0.85rem;">
+                Files stored on your virtual machine's persistent NVMe volume remain safe even when the machine is stopped.
+              </p>
+            </div>
+            <div>
+              <label for="storage-file-upload" class="btn btn-primary btn-sm" style="cursor: pointer;">
+                ↑ Upload File to VM
+              </label>
+              <input type="file" id="storage-file-upload" style="display: none;" />
+            </div>
+          </div>
+
+          <div id="storage-files-list">
+            <div class="spinner" style="margin: 20px auto;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Snapshots & Recovery -->
+      <div id="tab-snapshots" class="tab-content-panel" style="display: none;">
+        <div class="card" style="padding: 24px;">
+          <div class="card-header" style="margin-bottom: 20px;">
+            <div>
+              <h3 class="card-title">Disk Snapshots</h3>
+              <p class="text-secondary" style="font-size: 0.85rem;">
+                Save exact point-in-time images of your VM disk. Restore state anytime or revert accidental system modifications.
+              </p>
+            </div>
+            <button id="create-snapshot-btn" class="btn btn-primary btn-sm">
+              + Create Snapshot
+            </button>
+          </div>
+
+          <div id="snapshots-list">
+            <div class="spinner" style="margin: 20px auto;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Fix My PC (Diagnostics) -->
+      <div id="tab-diagnostics" class="tab-content-panel" style="display: none;">
+        <div class="card" style="padding: 24px;">
+          <div class="card-header" style="margin-bottom: 20px;">
+            <div>
+              <h3 class="card-title">Fix My PC — Automated Self-Healing</h3>
+              <p class="text-secondary" style="font-size: 0.85rem;">
+                Query the server agent to inspect kernel daemons, network routing, display server status, and resolve common VM issues.
+              </p>
+            </div>
+            <button id="run-diag-btn" class="btn btn-primary btn-sm">
+              Run System Diagnostics
+            </button>
+          </div>
+
+          <div id="diag-results-box" style="display: none;">
+            <!-- Rendered by computer.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: Modify / Upgrade -->
+      <div id="tab-upgrade" class="tab-content-panel" style="display: none;">
+        <div class="card" style="padding: 24px;">
+          <h3 class="card-title" style="margin-bottom: 8px;">Modify / Upgrade Computer Resources</h3>
+          <p class="text-secondary" style="font-size: 0.85rem; margin-bottom: 20px;">
+            Upgrade vCPU, RAM, or GPU resources without losing your disk data. The server agent hot-plugs resources or applies seamless reboot migration.
+          </p>
+
+          <div class="alert-banner alert-banner-info">
+            ℹ Storage expansions take effect immediately without re-imaging. GPU changes require a brief 30-second restart.
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="build.html" class="btn btn-primary">
+              Reconfigure or Add Resources →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/computer.js"></script>
+  </body>
+</html>

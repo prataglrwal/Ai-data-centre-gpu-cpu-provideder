@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Your Virtual Computer — Cloud PC Platform</title>
+    <meta name="description" content="Configure custom Cloud PC specifications: CPU, RAM, GPU, NVMe storage, and OS with authoritative backend pricing and availability." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="build.html" class="nav-link active">Build Computer</a>
+          <a href="dashboard.html" class="nav-link">My Computers</a>
+          <a href="account.html" class="nav-link">Account & Usage</a>
+        </nav>
+        <div class="nav-auth">
+          <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="padding: 40px 20px 80px;">
+      <!-- Page Header -->
+      <div style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: gap; gap: 16px;">
+        <div>
+          <h1 style="font-size: 2rem; margin-bottom: 6px;">Build Your Cloud PC</h1>
+          <p class="text-secondary" style="font-size: 0.95rem;">
+            Select hardware resources directly scheduled onto our physical host clusters.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">Capacity Status:</span>
+          <div id="availability-badge" class="status-badge status-starting">
+            <span class="status-dot"></span> Checking server capacity...
+          </div>
+        </div>
+      </div>
+
+      <!-- Builder Layout: Left Configuration Form, Right Live Price Sticky Sidebar -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; align-items: start;" class="builder-grid">
+        
+        <!-- Left: Configuration Panels -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+
+          <!-- 1. General & Location -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <h2 class="card-title" style="font-size: 1.2rem;">1. Machine Identity & Datacenter Region</h2>
+            </div>
+            
+            <div class="grid-2" style="gap: 16px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="computer-name-input">Computer Name</label>
+                <input type="text" id="computer-name-input" class="form-control" value="My-Cloud-Workstation" placeholder="e.g. Workstation-Alpha" maxlength="32" />
+                <div class="form-sublabel">Unique label identifying this virtual instance.</div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="location-select">Datacenter Region</label>
+                <select id="location-select" class="form-control">
+                  <option value="bom-1">Loading datacenter mesh...</option>
+                </select>
+                <div class="form-sublabel">Select closest datacenter for lowest interactive latency.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CPU Compute Tier -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">2. Processor (vCPU Cores)</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">Dedicated execution threads with high sustained boost clocks.</div>
+              </div>
+            </div>
+            <div id="cpu-options" class="option-cards-grid">
+              <div class="spinner" style="margin: 20px auto;"></div>
+            </div>
+          </div>
+
+          <!-- 3. RAM Memory -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">3. System Memory (RAM)</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">High-throughput DDR5 ECC registered server memory.</div>
+              </div>
+            </div>
+            <div id="ram-options" class="option-cards-grid">
+              <div class="spinner" style="margin: 20px auto;"></div>
+            </div>
+          </div>
+
+          <!-- 4. GPU Graphics Accelerator -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">4. Graphics Accelerator (GPU)</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">NVIDIA dedicated PCIe accelerators with dedicated VRAM.</div>
+              </div>
+            </div>
+            <div id="gpu-options" class="option-cards-grid">
+              <div class="spinner" style="margin: 20px auto;"></div>
+            </div>
+          </div>
+
+          <!-- 5. Storage Capacity & NVMe Tier -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">5. Persistent Storage & IOPS Tier</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">Persistent enterprise NVMe SSD disks retained across power cycles.</div>
+              </div>
+            </div>
+
+            <!-- Capacity Slider -->
+            <div style="margin-bottom: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                <label class="form-label" style="margin-bottom: 0;">Disk Capacity</label>
+                <strong id="storage-value" style="font-size: 1.2rem; color: var(--color-accent);">100 GB NVMe</strong>
+              </div>
+              <input type="range" id="storage-slider" min="50" max="2000" step="25" value="100" style="width: 100%; accent-color: var(--color-primary); cursor: pointer;" />
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">
+                <span>50 GB</span>
+                <span>500 GB</span>
+                <span>1000 GB</span>
+                <span>2000 GB</span>
+              </div>
+            </div>
+
+            <label class="form-label">Storage Performance Tier</label>
+            <div id="storage-type-options" class="option-cards-grid">
+              <!-- Rendered via build.js -->
+            </div>
+          </div>
+
+          <!-- 6. Operating System -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">6. Operating System</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">Officially supported and licensed system images.</div>
+              </div>
+            </div>
+            <div id="os-options" class="option-cards-grid">
+              <!-- Rendered via build.js -->
+            </div>
+          </div>
+
+          <!-- 7. Pre-installed Applications -->
+          <div class="card" style="padding: 24px;">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title" style="font-size: 1.2rem;">7. Pre-Installed Applications (Optional)</h2>
+                <div class="text-secondary" style="font-size: 0.8rem;">Automatically installed by our Server Agent during provisioning.</div>
+              </div>
+            </div>
+            <div id="app-options" class="option-cards-grid">
+              <!-- Rendered via build.js -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Authoritative Price Breakdown Sticky Card -->
+        <div style="position: sticky; top: 90px;">
+          <div class="card" style="padding: 24px; box-shadow: var(--shadow-lg);">
+            <div class="card-header" style="margin-bottom: 16px; padding-bottom: 12px;">
+              <h3 class="card-title" style="font-size: 1.15rem;">Price Calculation</h3>
+              <span class="chip" style="font-size: 0.75rem; background: var(--bg-surface);">Authoritative</span>
+            </div>
+
+            <!-- Billing Toggle -->
+            <div style="background: var(--bg-surface-elevated); padding: 12px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-weight: 600; font-size: 0.85rem;">Monthly Billing</div>
+                <div class="text-secondary" style="font-size: 0.75rem;">Switch off for Pay-As-You-Go hourly</div>
+              </div>
+              <label class="switch" style="position: relative; display: inline-block; width: 44px; height: 24px;">
+                <input type="checkbox" id="billing-toggle" checked style="opacity: 0; width: 0; height: 0;" />
+                <span class="slider round" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border-focus); border-radius: 24px; transition: .3s;"></span>
+              </label>
+            </div>
+
+            <!-- Itemized Pricing Breakdown (Requirement 8) -->
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-secondary">vCPU & RAM Compute:</span>
+                <span id="price-compute">—</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-secondary">GPU Acceleration:</span>
+                <span id="price-gpu">—</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-secondary">Persistent NVMe Disk:</span>
+                <span id="price-storage">—</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-secondary">OS & Software Licenses:</span>
+                <span id="price-software">—</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span class="text-secondary">Datacenter Taxes & Fees:</span>
+                <span id="price-taxes">—</span>
+              </div>
+            </div>
+
+            <!-- Total Price Row -->
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; margin-bottom: 24px;">
+              <div class="text-secondary" style="font-size: 0.8rem; margin-bottom: 4px;">Total Price:</div>
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <strong id="price-total" style="font-size: 1.75rem; color: var(--color-accent); font-weight: 800;">
+                  Calculating...
+                </strong>
+                <span id="price-cycle-label" class="text-muted" style="font-size: 0.85rem;">/ month</span>
+              </div>
+            </div>
+
+            <!-- Checkout Action Button -->
+            <button id="proceed-checkout-btn" class="btn btn-primary btn-block btn-lg" disabled>
+              Check Availability & Checkout
+            </button>
+
+            <div style="margin-top: 16px; text-align: center; font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
+              Includes PhonePe/UPI & PayPal payment gateways. Computer provisioning starts immediately upon backend payment confirmation.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/payment.js"></script>
+    <script src="/js/build.js"></script>
+  </body>
+</html>

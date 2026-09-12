@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Account, Billing & Usage — Cloud PC Platform</title>
+    <meta name="description" content="View billing statements, payment history, compute usage metrics, and manage active device sessions." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="build.html" class="nav-link">Build Computer</a>
+          <a href="dashboard.html" class="nav-link">My Computers</a>
+          <a href="account.html" class="nav-link active">Account & Usage</a>
+        </nav>
+        <div class="nav-auth">
+          <a href="dashboard.html" class="btn btn-outline btn-sm">My Computers</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="padding: 40px 20px 80px;">
+      <!-- Account Header -->
+      <div style="margin-bottom: 32px;">
+        <h1 style="font-size: 2rem; margin-bottom: 6px;">Customer Account & Billing</h1>
+        <p class="text-secondary" style="font-size: 0.95rem;">
+          Track compute usage, view PhonePe/PayPal transaction receipts, and manage multi-device sessions.
+        </p>
+      </div>
+
+      <!-- Account Profile Strip -->
+      <div class="card" style="padding: 24px; margin-bottom: 32px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700;">
+              👤
+            </div>
+            <div>
+              <h2 id="account-name" style="font-size: 1.3rem; margin-bottom: 4px;">Valued Customer</h2>
+              <div id="account-email" class="text-secondary" style="font-size: 0.85rem;">customer@cloudpc.com</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 20px; text-align: right;">
+            <div>
+              <div class="text-muted" style="font-size: 0.75rem;">ACCOUNT TIER</div>
+              <strong id="account-tier" style="color: var(--color-accent); font-size: 0.95rem;">Standard Cloud Tier</strong>
+            </div>
+            <div>
+              <div class="text-muted" style="font-size: 0.75rem;">MEMBER SINCE</div>
+              <strong id="account-joined" style="font-size: 0.95rem;">—</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resource Usage Summary Cards -->
+      <h2 style="font-size: 1.3rem; margin-bottom: 16px;">Compute Resource Consumption</h2>
+      <div class="grid-4" style="gap: 16px; margin-bottom: 32px;">
+        <div class="card" style="padding: 20px;">
+          <div class="text-secondary" style="font-size: 0.8rem; margin-bottom: 4px;">CPU Execution</div>
+          <strong id="usage-cpu-hours" style="font-size: 1.5rem; color: var(--color-primary);">0 hrs</strong>
+          <div class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">Billed per second</div>
+        </div>
+
+        <div class="card" style="padding: 20px;">
+          <div class="text-secondary" style="font-size: 0.8rem; margin-bottom: 4px;">GPU Compute</div>
+          <strong id="usage-gpu-hours" style="font-size: 1.5rem; color: var(--color-accent);">0 hrs</strong>
+          <div class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">Hardware passthrough time</div>
+        </div>
+
+        <div class="card" style="padding: 20px;">
+          <div class="text-secondary" style="font-size: 0.8rem; margin-bottom: 4px;">Persistent Disk</div>
+          <strong id="usage-storage-gb" style="font-size: 1.5rem; color: #fff;">0 GB-mo</strong>
+          <div class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">Allocated NVMe space</div>
+        </div>
+
+        <div class="card" style="padding: 20px;">
+          <div class="text-secondary" style="font-size: 0.8rem; margin-bottom: 4px;">Network Egress</div>
+          <strong id="usage-bandwidth" style="font-size: 1.5rem; color: var(--color-success);">0 GB</strong>
+          <div class="text-muted" style="font-size: 0.75rem; margin-top: 4px;">High-speed fiber transfer</div>
+        </div>
+      </div>
+
+      <!-- Payments & Invoices Table -->
+      <div class="card" style="padding: 24px; margin-bottom: 32px;">
+        <div class="card-header" style="margin-bottom: 16px;">
+          <div>
+            <h3 class="card-title">Payment Receipts & Invoices</h3>
+            <div class="text-secondary" style="font-size: 0.85rem;">Authoritative verified transactions via PhonePe / UPI and PayPal.</div>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Gateway / Method</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="payments-tbody">
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 20px;">Loading transaction ledger...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Active Sessions & Device Handoff -->
+      <div class="card" style="padding: 24px; margin-bottom: 32px;">
+        <div class="card-header" style="margin-bottom: 16px;">
+          <div>
+            <h3 class="card-title">Active Devices & Device Handoff</h3>
+            <div class="text-secondary" style="font-size: 0.85rem;">
+              Control active connections from your phone, tablet, or browser. Disconnect stale sessions remotely.
+            </div>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Device / Client</th>
+                <th>IP Address</th>
+                <th>Connected At</th>
+                <th>Cloud PC Instance</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sessions-tbody">
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 20px;">Retrieving active sessions...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- System Notifications Feed -->
+      <div class="card" style="padding: 24px;">
+        <h3 class="card-title" style="margin-bottom: 16px;">Infrastructure Alerts & Notifications</h3>
+        <div id="notifications-list">
+          <div class="spinner" style="margin: 20px auto;"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/account.js"></script>
+  </body>
+</html>

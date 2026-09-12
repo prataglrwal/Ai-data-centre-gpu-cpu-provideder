@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Cloud PC Connection — Cloud PC Platform</title>
+    <meta name="description" content="Direct low-latency streaming session to your real virtual computer with interactive keyboard, mouse, and terminal." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body style="background-color: #04070d; min-height: 100vh; display: flex; flex-direction: column;">
+    <!-- Top Session Navbar -->
+    <header class="navbar" style="position: static; border-bottom: 1px solid rgba(255,255,255,0.08);">
+      <div class="nav-container">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <a href="dashboard.html" class="nav-logo">
+            <div class="nav-logo-icon">💻</div>
+            <span>Cloud<strong>PC</strong></span>
+          </a>
+          <span style="color: var(--text-muted);">/</span>
+          <span id="session-computer-name" style="font-weight: 600; font-size: 0.95rem;">Cloud PC Session</span>
+        </div>
+
+        <!-- Session Status Pill & Controls -->
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div id="connection-status-pill" class="status-badge status-starting">
+            <span class="status-dot"></span> Connecting to VM Agent...
+          </div>
+          <div class="chip" style="font-family: var(--font-mono); font-size: 0.8rem;">
+            Ping: <span id="latency-display" style="color: var(--color-accent); margin-left: 4px;">— ms</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <button id="btn-session-clipboard" class="btn btn-secondary btn-sm" title="Synchronize Clipboard">
+            📋 Clipboard
+          </button>
+          <button id="btn-toggle-touch-bar" class="btn btn-secondary btn-sm" title="Toggle Touch Bar for Mobile/Tablet">
+            ⌨ Touch Keys
+          </button>
+          <button id="btn-session-fullscreen" class="btn btn-secondary btn-sm" title="Enter Fullscreen">
+            ⛶ Fullscreen
+          </button>
+          <button id="btn-session-reconnect" class="btn btn-outline btn-sm" title="Reconnect stream">
+            ↻ Reconnect
+          </button>
+          <button id="btn-session-disconnect" class="btn btn-outline btn-sm" style="color: var(--color-danger); border-color: rgba(239, 68, 68, 0.3);">
+            Disconnect
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Remote Screen Container -->
+    <main id="remote-session-wrapper" style="flex: 1; padding: 16px; display: flex; flex-direction: column; max-width: 1400px; margin: 0 auto; width: 100%;">
+      
+      <!-- Terminal & Remote Display Interface -->
+      <div class="terminal-wrapper">
+        <div class="terminal-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></div>
+            <span style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-secondary); margin-left: 8px;">
+              tty1 — Interactive Remote Terminal Stream (Direct VM Agent Bridge)
+            </span>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+            TLS 1.3 • WebSockets Stream
+          </div>
+        </div>
+
+        <!-- Terminal Viewport Output -->
+        <div id="terminal-view" class="terminal-viewport">
+          <div id="terminal-output">
+            <!-- Dynamically populated from backend server agent stream -->
+          </div>
+        </div>
+
+        <!-- Input Bar for Terminal -->
+        <form id="terminal-form" class="terminal-input-bar">
+          <span class="terminal-prompt">customer@cloud-pc:~$</span>
+          <input type="text" id="terminal-input" class="terminal-cmd-input" placeholder="Type command (e.g. uname -a, top, df -h, ls -la, nvidia-smi)..." autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          <button type="submit" class="btn btn-primary btn-sm" style="margin-left: 8px; padding: 4px 12px; font-size: 0.8rem;">Run</button>
+        </form>
+
+        <!-- Virtual Touch & Function Keys Bar for Mobile / Touchscreens -->
+        <div id="virtual-touch-bar" class="touch-keys-bar" style="display: flex;">
+          <button type="button" class="btn-touch-key" data-key="Esc">ESC</button>
+          <button type="button" class="btn-touch-key" data-key="Tab">TAB</button>
+          <button type="button" class="btn-touch-key" data-key="Enter">ENTER</button>
+          <button type="button" class="btn-touch-key" data-key="Clear">CLEAR</button>
+          <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto; align-self: center; padding-right: 8px;">
+            Touch / Mobile Virtual Bar
+          </span>
+        </div>
+      </div>
+
+      <!-- Session Info Footer -->
+      <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap; gap: 8px;">
+        <div>
+          💡 Press <strong>Enter</strong> to run commands. Clipboard and keystrokes are transmitted directly to the guest OS.
+        </div>
+        <div>
+          <a href="computer.html" id="back-to-computer-link" style="color: var(--color-primary);">Manage Hardware & Snapshots →</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/connect.js"></script>
+    <script>
+      // Update link to computer details
+      const pcId = window.getUrlParam('id');
+      if (pcId) {
+        const link = document.getElementById('back-to-computer-link');
+        if (link) link.href = `computer.html?id=${pcId}`;
+      }
+    </script>
+  </body>
+</html>

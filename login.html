@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In & Register — Cloud PC Platform</title>
+    <meta name="description" content="Secure customer authentication for Cloud PC Platform using Firebase Authentication." />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <div class="nav-logo-icon">💻</div>
+          <span>Cloud<strong>PC</strong></span>
+        </a>
+        <nav class="nav-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="build.html" class="nav-link">Build Computer</a>
+          <a href="dashboard.html" class="nav-link">My Computers</a>
+        </nav>
+        <div class="nav-auth">
+          <a href="index.html" class="btn btn-outline btn-sm">← Back to Home</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Auth Container -->
+    <main class="container" style="padding: 60px 20px; display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 180px);">
+      <div class="card" style="max-width: 460px; width: 100%; padding: 32px;">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">🔐</div>
+          <h1 style="font-size: 1.5rem; margin-bottom: 6px;">Customer Access</h1>
+          <p class="text-secondary" style="font-size: 0.85rem;">
+            Authenticate securely to access your virtual computers and manage resources.
+          </p>
+        </div>
+
+        <!-- Auth Tabs -->
+        <div class="auth-tabs" style="display: flex; gap: 8px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 24px;">
+          <button id="tab-signin" class="auth-tab tab-btn active" style="flex: 1; text-align: center;">Sign In</button>
+          <button id="tab-signup" class="auth-tab tab-btn" style="flex: 1; text-align: center;">Create Account</button>
+          <button id="tab-reset" class="auth-tab tab-btn" style="flex: 1; text-align: center;">Reset</button>
+        </div>
+
+        <!-- Sign In Form Panel -->
+        <div id="form-signin" class="auth-form-panel">
+          <form id="signin-form-element">
+            <div class="form-group">
+              <label class="form-label" for="signin-email">Email Address</label>
+              <input type="email" id="signin-email" class="form-control" placeholder="name@example.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="form-label" for="signin-password" style="margin-bottom: 0;">Password</label>
+                <a href="#" id="link-to-reset" style="font-size: 0.8rem; color: var(--color-primary);">Forgot password?</a>
+              </div>
+              <input type="password" id="signin-password" class="form-control" placeholder="••••••••" required autocomplete="current-password" />
+            </div>
+
+            <button type="submit" id="signin-submit-btn" class="btn btn-primary btn-block btn-lg" style="margin-top: 24px;">
+              Sign In to Your Cloud PC
+            </button>
+          </form>
+        </div>
+
+        <!-- Sign Up Form Panel -->
+        <div id="form-signup" class="auth-form-panel" style="display: none;">
+          <form id="signup-form-element">
+            <div class="form-group">
+              <label class="form-label" for="signup-name">Full Name</label>
+              <input type="text" id="signup-name" class="form-control" placeholder="Jane Doe" required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email Address</label>
+              <input type="email" id="signup-email" class="form-control" placeholder="name@example.com" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-password">Create Password</label>
+              <input type="password" id="signup-password" class="form-control" placeholder="Minimum 6 characters" minlength="6" required autocomplete="new-password" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-confirm">Confirm Password</label>
+              <input type="password" id="signup-confirm" class="form-control" placeholder="Re-enter password" minlength="6" required autocomplete="new-password" />
+            </div>
+
+            <button type="submit" id="signup-submit-btn" class="btn btn-primary btn-block btn-lg" style="margin-top: 24px;">
+              Create Customer Account
+            </button>
+          </form>
+        </div>
+
+        <!-- Password Reset Panel -->
+        <div id="form-reset" class="auth-form-panel" style="display: none;">
+          <form id="reset-form-element">
+            <div class="form-group">
+              <label class="form-label" for="reset-email">Your Account Email</label>
+              <input type="email" id="reset-email" class="form-control" placeholder="name@example.com" required />
+              <div class="form-sublabel">We'll send password recovery instructions via Firebase Auth.</div>
+            </div>
+
+            <button type="submit" id="reset-submit-btn" class="btn btn-primary btn-block btn-lg" style="margin-top: 24px;">
+              Send Reset Instructions
+            </button>
+
+            <div style="text-align: center; margin-top: 16px;">
+              <a href="#" id="link-to-signin" style="font-size: 0.85rem; color: var(--color-primary);">← Back to Sign In</a>
+            </div>
+          </form>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-subtle); text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+          🔒 Authentication secured by Firebase & Backend Session Tokens
+        </div>
+      </div>
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="/js/api.js"></script>
+    <script src="/js/firebase.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>
