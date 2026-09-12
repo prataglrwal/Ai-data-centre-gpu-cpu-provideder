@@ -1,0 +1,6 @@
+{
+  "name": "Cloud PC Platform",
+  "description": "Consumer Virtual Computer & Cloud PC Platform. Build your computer in the cloud, choose resources, and connect from any device.",
+  "requestFramePermissions": ["clipboard-read", "clipboard-write"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
